@@ -6,18 +6,18 @@ A simple command-line chat application demonstrating Spring AI's ChatClient capa
 - Java 17 or higher
 - Maven
 
-This examples uses OpenAI as the model provider.
+This example uses Anthropic (Claude) as the model provider.
 
-Before using the AI commands, make sure you have a developer token from OpenAI.
+Before using the AI commands, make sure you have an API key from Anthropic.
 
-Create an account at [OpenAI Signup](https://platform.openai.com/signup) and generate the token at [API Keys](https://platform.openai.com/account/api-keys).
+Create an account at [Anthropic Console](https://console.anthropic.com/) and generate the key at [API Keys](https://console.anthropic.com/settings/keys).
 
-The Spring AI project defines a configuration property named `spring.ai.openai.api-key` that you should set to the value of the API key obtained from OpenAI.
+The Spring AI project defines a configuration property named `spring.ai.anthropic.api-key` that you should set to the value of the API key obtained from Anthropic.
 
 Exporting an environment variable is one way to set that configuration property:
 
 ```shell
-export SPRING_AI_OPENAI_API_KEY=<INSERT KEY HERE>
+export ANTHROPIC_API_KEY=<INSERT KEY HERE>
 ```
 
 

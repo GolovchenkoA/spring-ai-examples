@@ -18,10 +18,11 @@ public class Application {
     CommandLineRunner cli(ChatClient.Builder builder, ConfigurableApplicationContext context) {
         return args -> {
             var chat = builder.build();
+            var question = args.length > 0 ? String.join(" ", args) : "Tell me a joke";
             System.out.println("\nSpring AI Hello World!");
-            System.out.println("USER: Tell me a joke");
-            System.out.println("ASSISTANT: " + 
-                    chat.prompt("Tell me a joke").call().content());
+            System.out.println("USER: " + question);
+            System.out.println("ASSISTANT: " +
+                    chat.prompt(question).call().content());
             System.out.println("\nHello World demo completed!");
             context.close();
         };
