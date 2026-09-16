@@ -1,5 +1,7 @@
 package org.springframework.ai.openai.samples.helloworld;
 
+import java.time.LocalDate;
+
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +19,9 @@ public class Application {
     @Bean
     CommandLineRunner cli(ChatClient.Builder builder, ConfigurableApplicationContext context) {
         return args -> {
-            var chat = builder.build();
+            var chat = builder
+                    .defaultSystem("Today's date is " + LocalDate.now() + ".")
+                    .build();
             var question = args.length > 0 ? String.join(" ", args) : "Tell me a joke";
             System.out.println("\nSpring AI Hello World!");
             System.out.println("USER: " + question);
