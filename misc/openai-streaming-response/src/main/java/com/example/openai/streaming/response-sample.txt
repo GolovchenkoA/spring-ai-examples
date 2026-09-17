@@ -1,0 +1,306 @@
+data:{
+  "metadata": {
+    "empty": true,
+    "id": "",
+    "model": "",
+    "promptMetadata": [],
+    "rateLimit": {
+      "requestsLimit": 0,
+      "requestsRemaining": 0,
+      "requestsReset": "PT0S",
+      "tokensLimit": 0,
+      "tokensRemaining": 0,
+      "tokensReset": "PT0S"
+    },
+    "usage": {
+      "cacheReadInputTokens": null,
+      "cacheWriteInputTokens": null,
+      "completionTokens": 0,
+      "nativeUsage": {},
+      "promptTokens": 0,
+      "totalTokens": 0
+    }
+  },
+  "result": {
+    "metadata": {
+      "contentFilters": [],
+      "empty": true,
+      "finishReason": null
+    },
+    "output": {
+      "media": [],
+      "messageType": "ASSISTANT",
+      "metadata": {
+        "messageType": "ASSISTANT"
+      },
+      "text": "Why don't scientists trust atoms?",
+      "toolCalls": []
+    }
+  },
+  "results": [
+    {
+      "metadata": {
+        "contentFilters": [],
+        "empty": true,
+        "finishReason": null
+      },
+      "output": {
+        "media": [],
+        "messageType": "ASSISTANT",
+        "metadata": {
+          "messageType": "ASSISTANT"
+        },
+        "text": "Why don't scientists trust atoms?",
+        "toolCalls": []
+      }
+    }
+  ]
+}
+
+data:{
+  "metadata": {
+    "empty": true,
+    "id": "",
+    "model": "",
+    "promptMetadata": [],
+    "rateLimit": {
+      "requestsLimit": 0,
+      "requestsRemaining": 0,
+      "requestsReset": "PT0S",
+      "tokensLimit": 0,
+      "tokensRemaining": 0,
+      "tokensReset": "PT0S"
+    },
+    "usage": {
+      "cacheReadInputTokens": null,
+      "cacheWriteInputTokens": null,
+      "completionTokens": 0,
+      "nativeUsage": {},
+      "promptTokens": 0,
+      "totalTokens": 0
+    }
+  },
+  "result": {
+    "metadata": {
+      "contentFilters": [],
+      "empty": true,
+      "finishReason": null
+    },
+    "output": {
+      "media": [],
+      "messageType": "ASSISTANT",
+      "metadata": {
+        "messageType": "ASSISTANT"
+      },
+      "text": "\n\nBecause they make up everything!",
+      "toolCalls": []
+    }
+  },
+  "results": [
+    {
+      "metadata": {
+        "contentFilters": [],
+        "empty": true,
+        "finishReason": null
+      },
+      "output": {
+        "media": [],
+        "messageType": "ASSISTANT",
+        "metadata": {
+          "messageType": "ASSISTANT"
+        },
+        "text": "\n\nBecause they make up everything!",
+        "toolCalls": []
+      }
+    }
+  ]
+}
+
+data:{
+  "metadata": {
+    "empty": true,
+    "id": "",
+    "model": "",
+    "promptMetadata": [],
+    "rateLimit": {
+      "requestsLimit": 0,
+      "requestsRemaining": 0,
+      "requestsReset": "PT0S",
+      "tokensLimit": 0,
+      "tokensRemaining": 0,
+      "tokensReset": "PT0S"
+    },
+    "usage": {
+      "cacheReadInputTokens": null,
+      "cacheWriteInputTokens": null,
+      "completionTokens": 0,
+      "nativeUsage": {},
+      "promptTokens": 0,
+      "totalTokens": 0
+    }
+  },
+  "result": {
+    "metadata": {
+      "contentFilters": [],
+      "empty": true,
+      "finishReason": null
+    },
+    "output": {
+      "media": [],
+      "messageType": "ASSISTANT",
+      "metadata": {
+        "messageType": "ASSISTANT"
+      },
+      "text": " ",
+      "toolCalls": []
+    }
+  },
+  "results": [
+    {
+      "metadata": {
+        "contentFilters": [],
+        "empty": true,
+        "finishReason": null
+      },
+      "output": {
+        "media": [],
+        "messageType": "ASSISTANT",
+        "metadata": {
+          "messageType": "ASSISTANT"
+        },
+        "text": " ",
+        "toolCalls": []
+      }
+    }
+  ]
+}
+
+data:{
+  "metadata": {
+    "empty": true,
+    "id": "",
+    "model": "",
+    "promptMetadata": [],
+    "rateLimit": {
+      "requestsLimit": 0,
+      "requestsRemaining": 0,
+      "requestsReset": "PT0S",
+      "tokensLimit": 0,
+      "tokensRemaining": 0,
+      "tokensReset": "PT0S"
+    },
+    "usage": {
+      "cacheReadInputTokens": null,
+      "cacheWriteInputTokens": null,
+      "completionTokens": 0,
+      "nativeUsage": {},
+      "promptTokens": 0,
+      "totalTokens": 0
+    }
+  },
+  "result": {
+    "metadata": {
+      "contentFilters": [],
+      "empty": true,
+      "finishReason": null
+    },
+    "output": {
+      "media": [],
+      "messageType": "ASSISTANT",
+      "metadata": {
+        "messageType": "ASSISTANT"
+      },
+      "text": "ðŸ˜„",
+      "toolCalls": []
+    }
+  },
+  "results": [
+    {
+      "metadata": {
+        "contentFilters": [],
+        "empty": true,
+        "finishReason": null
+      },
+      "output": {
+        "media": [],
+        "messageType": "ASSISTANT",
+        "metadata": {
+          "messageType": "ASSISTANT"
+        },
+        "text": "ðŸ˜„",
+        "toolCalls": []
+      }
+    }
+  ]
+}
+
+data:{
+  "metadata": {
+    "empty": true,
+    "id": "msg_011Cf9hwWcnZAmHps4dMMTPa",
+    "model": "claude-haiku-4-5-20251001",
+    "promptMetadata": [],
+    "rateLimit": {
+      "inputTokensLimit": 10000000,
+      "inputTokensRemaining": 10000000,
+      "inputTokensReset": "PT0.6859105S",
+      "outputTokensLimit": 2000000,
+      "outputTokensRemaining": 2000000,
+      "outputTokensReset": "PT0.6859105S",
+      "requestsLimit": 10000,
+      "requestsRemaining": 9999,
+      "requestsReset": "PT0.6859105S",
+      "tokensLimit": 12000000,
+      "tokensRemaining": 12000000,
+      "tokensReset": "PT0.6859105S"
+    },
+    "usage": {
+      "promptTokens": 11,
+      "completionTokens": 20,
+      "totalTokens": 31,
+      "cacheReadInputTokens": 0,
+      "cacheWriteInputTokens": 0,
+      "nativeUsage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 11,
+        "output_tokens": 20,
+        "valid": true
+      }
+    }
+  },
+  "result": {
+    "metadata": {
+      "contentFilters": [],
+      "empty": true,
+      "finishReason": "end_turn"
+    },
+    "output": {
+      "media": [],
+      "messageType": "ASSISTANT",
+      "metadata": {
+        "messageType": "ASSISTANT"
+      },
+      "text": "",
+      "toolCalls": []
+    }
+  },
+  "results": [
+    {
+      "metadata": {
+        "contentFilters": [],
+        "empty": true,
+        "finishReason": "end_turn"
+      },
+      "output": {
+        "media": [],
+        "messageType": "ASSISTANT",
+        "metadata": {
+          "messageType": "ASSISTANT"
+        },
+        "text": "",
+        "toolCalls": []
+      }
+    }
+  ]
+}

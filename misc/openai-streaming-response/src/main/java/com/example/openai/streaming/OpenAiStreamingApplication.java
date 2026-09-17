@@ -3,10 +3,9 @@ package com.example.openai.streaming;
 import reactor.core.publisher.Flux;
 
 import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.openai.OpenAiChatModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
@@ -25,10 +24,14 @@ public class OpenAiStreamingApplication {
 @RestController
 @RequestMapping("/ai")
 class ChatController {
-	private final OpenAiChatModel chatModel;
 
-	@Autowired
-	public ChatController(OpenAiChatModel chatModel) {
+	// ChatModel is the provider-agnostic interface - Spring Boot autoconfigures
+	// whichever implementation matches the model starter on the classpath
+	// (OpenAiChatModel, AnthropicChatModel, etc.), so this controller doesn't
+	// need to know or care which provider is actually wired in.
+	private final ChatModel chatModel;
+
+	public ChatController(ChatModel chatModel) {
 		this.chatModel = chatModel;
 	}
 
