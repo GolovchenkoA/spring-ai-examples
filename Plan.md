@@ -12,6 +12,7 @@ Tick a box once you've run and tried a module.
 
 ## Tier 1 — Core concepts (still one app, one model, no external servers)
 - [ ] [prompt-engineering/prompt-engineering-patterns](prompt-engineering/prompt-engineering-patterns) — prompting techniques
+- [x] [prompt-engineering/prompt-engineering-caching](prompt-engineering/prompt-engineering-caching) — prompting techniques with caching
 - [ ] [misc/openai-streaming-response](misc/openai-streaming-response) — streaming output
 - [ ] [kotlin/kotlin-function-callback](kotlin/kotlin-function-callback) — Kotlin variant of tool calling
 - [ ] [advisors/recursive-advisor-demo](advisors/recursive-advisor-demo)
