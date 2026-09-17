@@ -1,0 +1,10 @@
+
+REQUEST:[{"media":[],"messageType":"USER","metadata":{"messageType":"USER"},"text":"What is current weather in Paris?"}]
+
+RESPONSE:[{"metadata":{"contentFilters":[],"empty":true,"finishReason":"tool_use"},"output":{"media":[],"messageType":"ASSISTANT","metadata":{"messageType":"ASSISTANT"},"text":"","toolCalls":[{"id":"toolu_01VTGybz385PmsV2cDLEoDbh","type":"function","name":"weather","arguments":"{\"location\":\"Paris\"}"}]}}]
+
+REQUEST:[{"media":[],"messageType":"USER","metadata":{"messageType":"USER"},"text":"What is current weather in Paris?"},{"media":[],"messageType":"ASSISTANT","metadata":{"messageType":"ASSISTANT"},"text":"","toolCalls":[{"id":"toolu_01VTGybz385PmsV2cDLEoDbh","type":"function","name":"weather","arguments":"{\"location\":\"Paris\"}"}]},{"messageType":"TOOL","metadata":{"messageType":"TOOL"},"responses":[{"id":"toolu_01VTGybz385PmsV2cDLEoDbh","name":"weather","responseData":"\"The current weather in Paris is sunny with a temperature of 25°C.\""}],"text":""}]
+
+RESPONSE:[{"metadata":{"contentFilters":[],"empty":true,"finishReason":"end_turn"},"output":{"media":[],"messageType":"ASSISTANT","metadata":{"messageType":"ASSISTANT"},"text":"The current weather in Paris is **sunny** with a temperature of **25°C** (approximately 77°F).","toolCalls":[]}}]
+
+The current weather in Paris is **sunny** with a temperature of **25°C** (approximately 77°F).

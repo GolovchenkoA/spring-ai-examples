@@ -15,7 +15,7 @@ Tick a box once you've run and tried a module.
 - [x] [prompt-engineering/prompt-engineering-caching](prompt-engineering/prompt-engineering-caching) — prompting techniques with caching
 - [x] [misc/openai-streaming-response](misc/openai-streaming-response) — streaming output
 - [ ] [kotlin/kotlin-function-callback](kotlin/kotlin-function-callback) — Kotlin variant of tool calling
-- [ ] [advisors/recursive-advisor-demo](advisors/recursive-advisor-demo)
+- [x] [advisors/recursive-advisor-demo](advisors/recursive-advisor-demo)
 - [ ] [advisors/tool-argument-augmenter-demo](advisors/tool-argument-augmenter-demo)
 - [ ] [advisors/evaluation-recursive-advisor-demo](advisors/evaluation-recursive-advisor-demo) — advisor chain concepts, still single-process
 
