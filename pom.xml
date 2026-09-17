@@ -16,6 +16,8 @@
 	<modules>
 		<module>agents/reflection</module>
 		<module>agentic-patterns</module>
+		<module>image-processing/ollama-vision-detection</module>
+		<module>image-processing/claude-vision-detection</module>
 
 		<!-- <module>kotlin/kotlin-hello-world</module>
 		<module>kotlin/kotlin-function-callback</module>

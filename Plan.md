@@ -19,6 +19,10 @@ Tick a box once you've run and tried a module.
 - [x] [advisors/tool-argument-augmenter-demo](advisors/tool-argument-augmenter-demo)
 - [x] [advisors/evaluation-recursive-advisor-demo](advisors/evaluation-recursive-advisor-demo) — advisor chain concepts, still single-process
 
+## Image Processing (vision models predicting self-checkout areas)
+- [ ] [image-processing/ollama-vision-detection](image-processing/ollama-vision-detection) — local/open model via Ollama (default `qwen2.5vl:7b`)
+- [ ] [image-processing/claude-vision-detection](image-processing/claude-vision-detection) — Claude vision via Anthropic (cloud), same detect/visualize CLI for side-by-side comparison
+
 ## Tier 2 — MCP fundamentals (one client ↔ one server, auto-configured)
 - [ ] [model-context-protocol/client-starter/starter-default-client](model-context-protocol/client-starter/starter-default-client) — simplest MCP client
 - [ ] [model-context-protocol/client-starter/starter-webflux-client](model-context-protocol/client-starter/starter-webflux-client) — same idea, reactive
