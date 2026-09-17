@@ -8,6 +8,7 @@ Tick a box once you've run and tried a module.
 - [ ] [kotlin/kotlin-hello-world](kotlin/kotlin-hello-world) — simplest possible Spring AI call, just to confirm your API key/setup works
 - [x] [models/chat/helloworld](models/chat/helloworld) — basic `ChatClient` usage patterns (ported from OpenAI to Claude/Anthropic)
 - [x] [misc/spring-ai-java-function-callback](misc/spring-ai-java-function-callback) — one function callback, no protocol overhead
+- [x] [misc/pizza-tools](misc/pizza-tools) — tools. MCP server example
 
 ## Tier 1 — Core concepts (still one app, one model, no external servers)
 - [ ] [prompt-engineering/prompt-engineering-patterns](prompt-engineering/prompt-engineering-patterns) — prompting techniques
