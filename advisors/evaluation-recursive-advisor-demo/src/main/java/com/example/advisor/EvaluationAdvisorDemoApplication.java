@@ -24,6 +24,15 @@ public class EvaluationAdvisorDemoApplication {
 		SpringApplication.run(EvaluationAdvisorDemoApplication.class, args);
 	}
 
+	/**
+	 * Anthropic official courses. Evaluation workflow
+	 *    https://academy.claude.com/courses/building-with-the-claude-api/a-typical-eval-workflow
+	 *    https://academy.claude.com/courses/building-with-the-claude-api/running-the-eval
+	 * @param anthropicChatModel
+	 * @param ollamaChatModel
+	 * @return
+	 */
+
 	@Bean
 	CommandLineRunner commandLineRunner(AnthropicChatModel anthropicChatModel, OllamaChatModel ollamaChatModel) {
 		return args -> {
@@ -31,7 +40,11 @@ public class EvaluationAdvisorDemoApplication {
 			ChatClient chatClient = ChatClient.builder(anthropicChatModel) // @formatter:off
 					.defaultTools(new MyTools())
 					.defaultAdvisors(
-						
+
+//			it uses the Ollama-backed client purely to evaluate/critique the Anthropic-backed client's answer
+//			(rating it, retrying up to maxRepeatAttempts(15) until it scores successRating(4) or better).
+//			So one model generates, a different (here, local/free) model judges — a deliberate separation of
+//			"the model doing the task" from "the model grading the task."
 						SelfRefineEvaluationAdvisor.builder()
 							.chatClientBuilder(ChatClient.builder(ollamaChatModel))
 							.maxRepeatAttempts(15)

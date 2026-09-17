@@ -1,0 +1,44 @@
+Q:what else ollama models do exist apart of spring.ai.ollama.chat.model=avcodes/flowaicom-flow-judge:q4
+
+A: Ollama's library has hundreds of models, organized by what they're good at. A few categories relevant to what you're doing:
+
+**General chat models**
+- `llama3.1` (8B/70B/405B) — Meta's flagship, strong all-rounder
+- `qwen3` / `qwen2.5` — Alibaba's line, competitive quality per size
+- `mistral` / `mixtral` — good instruction-following, permissive license
+- `gemma3` — Google's open model, various sizes
+
+**Coding-focused**
+- `qwen3-coder` (30B variants) — strong on SWE-bench style tasks
+- `deepseek-coder`
+- `codellama`
+
+**Reasoning-focused**
+- `deepseek-r1` — chain-of-thought/reasoning specialist
+- `llama4` (Scout, MoE) — newer, larger, reasoning-capable
+
+**Vision/multimodal**
+- `llava` — image + text, ask questions about images
+- `gemma3` (some variants support vision)
+
+**Lightweight (laptop-friendly, 8GB RAM)**
+- `llama3.2:3b`, `phi3:mini`, `gemma3:4b`
+
+**Purpose-built for evaluation/judging** — most directly relevant to your `SelfRefineEvaluationAdvisor` use case, as alternatives to `avcodes/flowaicom-flow-judge:q4`:
+- `prometheus-eval` variants — another open judge-model family, similar niche to Flow-Judge
+- General-purpose models with `temperature=0` can also act as an ad-hoc judge (less specialized/consistent than a purpose-built one, but simpler to set up)
+
+**To browse/pull any of these:**
+```bash
+ollama pull llama3.1
+ollama pull qwen3-coder:30b
+```
+Full searchable catalog: [ollama.com/library](https://ollama.com/library).
+
+**For your project specifically**: swapping the judge is just a one-line change in [application.properties](advisors/evaluation-recursive-advisor-demo/src/main/resources/application.properties) — `spring.ai.ollama.chat.model=<new-model-name>` (plus `ollama pull <new-model-name>` first) — no Java code changes needed, since `SelfRefineEvaluationAdvisor` just takes whatever `ChatClient.Builder` it's given.
+
+Sources:
+- [Ollama Models Cheat Sheet 2026](https://computingforgeeks.com/ollama-models-cheat-sheet/)
+- [Best Ollama Models 2026: 25+ Ranked by VRAM & SWE-Bench](https://www.morphllm.com/best-ollama-models)
+- [What models are available in Ollama? Complete list 2026](https://theneuralbase.com/ollama/qna/what-models-are-available-in-ollama/)
+- [Best Ollama Models 2026: 15 Ranked](https://localaimaster.com/blog/best-ollama-models)
