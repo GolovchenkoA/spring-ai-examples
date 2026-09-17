@@ -16,7 +16,7 @@ Tick a box once you've run and tried a module.
 - [x] [misc/openai-streaming-response](misc/openai-streaming-response) — streaming output
 - [ ] [kotlin/kotlin-function-callback](kotlin/kotlin-function-callback) — Kotlin variant of tool calling
 - [x] [advisors/recursive-advisor-demo](advisors/recursive-advisor-demo)
-- [ ] [advisors/tool-argument-augmenter-demo](advisors/tool-argument-augmenter-demo)
+- [x] [advisors/tool-argument-augmenter-demo](advisors/tool-argument-augmenter-demo)
 - [ ] [advisors/evaluation-recursive-advisor-demo](advisors/evaluation-recursive-advisor-demo) — advisor chain concepts, still single-process
 
 ## Tier 2 — MCP fundamentals (one client ↔ one server, auto-configured)

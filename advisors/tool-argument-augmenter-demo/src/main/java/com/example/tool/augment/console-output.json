@@ -1,0 +1,55 @@
+REQUEST:[
+  {
+    "media": [],
+    "messageType": "USER",
+    "metadata": {
+      "messageType": "USER"
+    },
+    "text": "What is current weather in Paris?"
+  }
+]
+
+RESPONSE:[
+  {
+    "metadata": {
+      "contentFilters": [],
+      "empty": true,
+      "finishReason": "tool_use"
+    },
+    "output": {
+      "media": [],
+      "messageType": "ASSISTANT",
+      "metadata": {
+        "messageType": "ASSISTANT"
+      },
+      "text": "",
+      "toolCalls": [
+        {
+          "id": "toolu_01AdetMnpZYSckvryx4ZBTtF",
+          "type": "function",
+          "name": "weather",
+          "arguments": "{
+            "location": "Paris",
+            "innerThought": "The user is asking for the current weather in Paris. I need to call the weather function with Paris as the location to retrieve the current weather conditions. This is a straightforward request for weather information in a specific city.",
+            "memoryNotes": [
+              "User requested weather information for Paris",
+              "Paris is a major city in France, commonly asked location for weather"
+            ],
+            "confidence": "high"
+          }"
+        }
+      ]
+    }
+  }
+]
+
+2026-09-17T23:43:34.942+02:00  INFO 21092 --- [recursive-advisor-toolcall-with-memory-additionl-arguments] [           main] c.example.tool.augment.DemoApplication   : LLM Reasoning: The user is asking for the current weather in Paris. I need to call the weather function with Paris as the location to retrieve the current weather conditions. This is a straightforward request for weather information in a specific city.
+2026-09-17T23:43:34.942+02:00  INFO 21092 --- [recursive-advisor-toolcall-with-memory-additionl-arguments] [           main] c.example.tool.augment.DemoApplication   : Confidence: high
+2026-09-17T23:43:34.942+02:00  INFO 21092 --- [recursive-advisor-toolcall-with-memory-additionl-arguments] [           main] c.example.tool.augment.DemoApplication   : Thinking notest: [User requested weather information for Paris, Paris is a major city in France, commonly asked location for weather]
+2026-09-17T23:43:34.942+02:00  INFO 21092 --- [recursive-advisor-toolcall-with-memory-additionl-arguments] [           main] c.example.tool.augment.DemoApplication   : Tool: weather
+REQUEST:[{"messageType":"SYSTEM","metadata":{"messageType":"SYSTEM"},"text":""},{"media":[],"messageType":"USER","metadata":{"messageType":"USER"},"text":"What is current weather in Paris?"},{"media":[],"messageType":"ASSISTANT","metadata":{"messageType":"ASSISTANT"},"text":"","toolCalls":[{"id":"toolu_01AdetMnpZYSckvryx4ZBTtF","type":"function","name":"weather","arguments":"{\"location\":\"Paris\",\"innerThought\":\"The user is asking for the current weather in Paris. I need to call the weather function with Paris as the location to retrieve the current weather conditions. This is a straightforward request for weather information in a specific city.\",\"memoryNotes\":[\"User requested weather information for Paris\",\"Paris is a major city in France, commonly asked location for weather\"],\"confidence\":\"high\"}"}]},{"messageType":"TOOL","metadata":{"messageType":"TOOL"},"responses":[{"id":"toolu_01AdetMnpZYSckvryx4ZBTtF","name":"weather","responseData":"\"The current weather in Paris is sunny with a temperature of 25°C.\""}],"text":""}]
+
+RESPONSE:[{"metadata":{"contentFilters":[],"empty":true,"finishReason":"end_turn"},"output":{"media":[],"messageType":"ASSISTANT","metadata":{"messageType":"ASSISTANT"},"text":"{\n  \"result\": \"The current weather in Paris is sunny with a temperature of 25°C.\",\n  \"thinking\": {\n    \"innerThought\": \"I called the weather function with 'Paris' as the location to retrieve current weather conditions. The function successfully returned the weather information indicating sunny conditions with 25°C temperature.\",\n    \"memoryNotes\": [\"Paris weather shows sunny conditions at 25°C\", \"Successfully retrieved real-time weather data for Paris\", \"User prefers JSON formatted responses\"],\n    \"confidence\": \"high\"\n  }\n}","toolCalls":[]}}]
+
+MyResponse[result=The current weather in Paris is sunny with a temperature of 25°C., thinking=AgentThinking[innerThought=I called the weather function with 'Paris' as the location to retrieve current weather conditions. The function successfully returned the weather information indicating sunny conditions with 25°C temperature., confidence=high, memoryNotes=[Paris weather shows sunny conditions at 25°C, Successfully retrieved real-time weather data for Paris, User prefers JSON formatted responses]]]
+

@@ -22,15 +22,15 @@
 	</properties>
 	<dependencies>
 
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.ai</groupId>-->
+<!--			<artifactId>spring-ai-starter-model-openai</artifactId>-->
+<!--		</dependency>-->
+
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-starter-model-openai</artifactId>
-		</dependency>
-
-		<!-- <dependency>
-			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-starter-model-anthropic</artifactId>
-		</dependency> -->
+		</dependency>
 
 		<!-- Netty DNS resolver for macOS -->
 		<dependency>
