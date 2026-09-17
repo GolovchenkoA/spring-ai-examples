@@ -26,6 +26,7 @@
 		<module>misc/claude-skills-demo/document-forge</module>
 
 		<module>models/chat/helloworld</module>
+		<module>models/chat/anthropic-web-search-tool</module>
 
 		<module>model-context-protocol/brave-docker-agents-gateway</module>
 		<module>model-context-protocol/client-starter/starter-default-client</module>

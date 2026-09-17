@@ -1,0 +1,12 @@
+spring:
+  ai:
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY}
+      chat:
+        # Pick the model tier: smarter/slower/pricier (Opus) vs. balanced (Sonnet)
+        # vs. fastest/cheapest (Haiku). None of these affect internet access —
+        # that comes from the webSearchTool configured in Application.java.
+        # model: claude-opus-4-5-20251101
+         model: claude-sonnet-4-5-20250929
+#        model: claude-haiku-4-5-20251001
+
