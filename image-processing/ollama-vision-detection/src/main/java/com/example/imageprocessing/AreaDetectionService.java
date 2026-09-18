@@ -57,9 +57,18 @@ public class AreaDetectionService {
 				- "scanning": where items are scanned/weighed
 				- "table": any checkout counter/table surface
 
-				For each area you can identify, provide a pixel bounding box (x, y, width,
-				height) that tightly encloses it, calibrated to the exact image size given
-				above. Only include areas you can actually see - do not invent areas that
+				Expected spatial layout - use this to sanity-check your own answer:
+				- The table zone must be to the right of the bagging zone.
+				- The bagging zone must be to the left of the table zone.
+				- The scanning zone must be inside the table zone.
+
+				For each area you can identify, provide its outline as exactly 4 pixel
+				points (a quadrilateral), ordered clockwise starting from the top-left
+				corner: top-left, top-right, bottom-right, bottom-left. Each point is a
+				[x, y] pair, calibrated to the exact image size given above, e.g.:
+				"coordinates": [[417, 211], [817, 211], [817, 611], [417, 611]]
+
+				Only include areas you can actually see - do not invent areas that
 				aren't visible in the photo. This is a best-effort visual estimate, not a
 				precision measurement.
 				""".formatted(width, height);
@@ -72,7 +81,12 @@ public class AreaDetectionService {
 		return new AreaDetectionResult(new ImageDimensions(width, height), response.areas());
 	}
 
-	public void detectAndWrite(String imagePath, String outputJsonPath) throws IOException {
+	/**
+	 * Detects areas and writes the JSON description to disk, returning the
+	 * path it was written to (so callers can feed it straight into
+	 * {@link AreaVisualizationService#visualize}).
+	 */
+	public Path detectAndWrite(String imagePath, String outputJsonPath) throws IOException {
 		AreaDetectionResult result = detect(imagePath);
 
 		Path outputPath = outputJsonPath != null
@@ -83,10 +97,22 @@ public class AreaDetectionService {
 
 		System.out.println("Detected " + result.areas().size() + " area(s):");
 		for (Area area : result.areas()) {
-			System.out.printf("  - %-10s x=%d y=%d width=%d height=%d%n", area.name(), area.x(), area.y(),
-					area.width(), area.height());
+			System.out.printf("  - %-10s %s%n", area.name(), formatCoordinates(area.coordinates()));
 		}
 		System.out.println("\nWritten to: " + outputPath.toAbsolutePath());
+
+		return outputPath;
+	}
+
+	private String formatCoordinates(int[][] coordinates) {
+		StringBuilder sb = new StringBuilder();
+		for (int[] point : coordinates) {
+			if (!sb.isEmpty()) {
+				sb.append(' ');
+			}
+			sb.append('[').append(point[0]).append(',').append(point[1]).append(']');
+		}
+		return sb.toString();
 	}
 
 	private MimeType guessMimeType(String fileName) {

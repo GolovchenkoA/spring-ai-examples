@@ -1,14 +1,15 @@
 # Ollama Vision Detection
 
 Detects areas (bagging, scanning, table) in a photo of a self-checkout station
-using a local Ollama vision model — no cloud API key needed. Two commands:
+using a local Ollama vision model — no cloud API key needed. Takes a single
+argument (the image path) and runs both steps in one call:
 
-1. **`detect`** — scan a photo, output a JSON description of the areas found
-   (source image dimensions + each area's name and pixel bounding box). The
+1. **Detect** — scan the photo, write a JSON description of the areas found
+   (source image dimensions + each area's name and 4-point outline). The
    source image itself is never modified.
-2. **`visualize`** — take a photo + a `detect` JSON output, draw the predicted
-   areas on a *new* annotated image so you can visually check whether the
-   prediction is correct.
+2. **Visualize** — draw the predicted areas from that JSON onto a *new*
+   annotated image, so you can visually check whether the prediction is
+   correct.
 
 ## Prerequisites
 
@@ -34,29 +35,27 @@ ollama pull moondream2            # spring.ai.ollama.chat.model=moondream2
 
 ## Running
 
-**Case 1 — detect areas:**
 ```bash
-./mvnw spring-boot:run -Dspring-boot.run.arguments="detect path/to/checkout.jpg"
+./mvnw spring-boot:run -Dspring-boot.run.arguments="path/to/checkout.jpg"
 ```
-Writes `path/to/checkout.jpg.areas.json` (or pass a second argument for a
-custom output path), e.g.:
+
+This writes `path/to/checkout.jpg.areas.json`, e.g.:
 ```json
 {
   "sourceImage": { "width": 1920, "height": 1080 },
   "areas": [
-    { "name": "scanning", "x": 640, "y": 200, "width": 400, "height": 350 },
-    { "name": "bagging",  "x": 1100, "y": 220, "width": 420, "height": 360 }
+    { "name": "scanning", "coordinates": [[640, 200], [1040, 200], [1040, 550], [640, 550]] },
+    { "name": "bagging",  "coordinates": [[1100, 220], [1520, 220], [1520, 580], [1100, 580]] }
   ]
 }
 ```
+Each area's `coordinates` are exactly 4 `[x, y]` points, ordered clockwise
+from the top-left corner (top-left, top-right, bottom-right, bottom-left).
 
-**Case 2 — visualize the prediction:**
-```bash
-./mvnw spring-boot:run -Dspring-boot.run.arguments="visualize path/to/checkout.jpg path/to/checkout.jpg.areas.json"
-```
-Draws a colored, labeled box for each area onto a copy of the image
+...then immediately draws those areas onto a new annotated image
 (`checkout-annotated.png` by default), saves it, and tries to open it with
-your OS's default image viewer.
+your OS's default image viewer — so you see both the JSON and the visual
+check from a single command.
 
 ## Accuracy expectations
 

@@ -5,12 +5,13 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
 import javax.imageio.ImageIO;
 
@@ -72,14 +73,17 @@ public class AreaVisualizationService {
 		for (Area area : result.areas()) {
 			Color color = COLORS_BY_AREA.getOrDefault(area.name().toLowerCase(), DEFAULT_COLOR);
 			g.setColor(color);
-			g.drawRect(area.x(), area.y(), area.width(), area.height());
+			g.drawPolygon(toPolygon(area.coordinates()));
 
-			int labelY = Math.max(area.y() - 6, 16);
+			int minX = Arrays.stream(area.coordinates()).mapToInt(p -> p[0]).min().orElse(0);
+			int minY = Arrays.stream(area.coordinates()).mapToInt(p -> p[1]).min().orElse(0);
+
+			int labelY = Math.max(minY - 6, 16);
 			g.setColor(new Color(0, 0, 0, 160));
 			int labelWidth = g.getFontMetrics().stringWidth(area.name()) + 8;
-			g.fillRect(area.x(), labelY - 16, labelWidth, 20);
+			g.fillRect(minX, labelY - 16, labelWidth, 20);
 			g.setColor(color);
-			g.drawString(area.name(), area.x() + 4, labelY);
+			g.drawString(area.name(), minX + 4, labelY);
 		}
 		g.dispose();
 
@@ -122,6 +126,14 @@ public class AreaVisualizationService {
 			throw new IOException("No ImageIO writer available for format '" + format + "' (file: "
 					+ file.getAbsolutePath() + ")");
 		}
+	}
+
+	private Polygon toPolygon(int[][] coordinates) {
+		Polygon polygon = new Polygon();
+		for (int[] point : coordinates) {
+			polygon.addPoint(point[0], point[1]);
+		}
+		return polygon;
 	}
 
 	private String withSuffix(String imagePath, String suffix) {

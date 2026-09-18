@@ -1,0 +1,16 @@
+{
+  "sourceImage" : {
+    "width" : 1234,
+    "height" : 822
+  },
+  "areas" : [ {
+    "name" : "scanning",
+    "coordinates": [[1,1],[2,2],[3,3],[4,4]]
+  }, {
+    "name" : "table",
+    "coordinates": [[1,1],[2,2],[3,3],[4,4]]
+  }, {
+    "name" : "table",
+    "coordinates": [[1,1],[2,2],[3,3],[4,4]]
+  } ]
+}
