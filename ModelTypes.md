@@ -138,6 +138,7 @@ LLM/LVM, usually trained end-to-end on labeled pixel masks rather than on
 text.
 
 **Sub-types worth knowing apart:**
+
 | Type | Output | Example models |
 |---|---|---|
 | **Object detection** | Bounding boxes + class labels (still just boxes, no pixel mask) | YOLO, Grounding DINO |
