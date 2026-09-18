@@ -1,0 +1,25 @@
+{
+  "sourceImage" : {
+    "width" : 1234,
+    "height" : 822
+  },
+  "areas" : [ {
+    "name" : "table",
+    "x" : 428,
+    "y" : 283,
+    "width" : 340,
+    "height" : 170
+  }, {
+    "name" : "scanning",
+    "x" : 462,
+    "y" : 295,
+    "width" : 230,
+    "height" : 110
+  }, {
+    "name" : "bagging",
+    "x" : 222,
+    "y" : 228,
+    "width" : 198,
+    "height" : 500
+  } ]
+}
