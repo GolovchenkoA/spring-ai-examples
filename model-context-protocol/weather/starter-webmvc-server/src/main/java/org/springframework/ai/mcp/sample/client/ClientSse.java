@@ -24,6 +24,10 @@ import io.modelcontextprotocol.client.transport.HttpClientSseClientTransport;
 public class ClientSse {
 
 	public static void main(String[] args) {
+
+		// The MCP server should be run manually !!
+		// But this client fails with the error:
+		// .TimeoutException: Did not observe any item or terminal signal within 20000ms in 'map' (and no fallback has been configured)
 		var transport = HttpClientSseClientTransport.builder("http://localhost:8080").build();
 		new SampleClient(transport).run();
 	}

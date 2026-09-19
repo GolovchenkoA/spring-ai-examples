@@ -24,10 +24,10 @@ Tick a box once you've run and tried a module.
 - [x] [image-processing/claude-vision-detection](image-processing/claude-vision-detection) — Claude vision via Anthropic (cloud), same detect/visualize CLI for side-by-side comparison
 
 ## Tier 2 — MCP fundamentals (one client ↔ one server, auto-configured)
-- [ ] [model-context-protocol/client-starter/starter-default-client](model-context-protocol/client-starter/starter-default-client) — simplest MCP client
-- [ ] [model-context-protocol/client-starter/starter-webflux-client](model-context-protocol/client-starter/starter-webflux-client) — same idea, reactive
-- [ ] [model-context-protocol/weather/starter-stdio-server](model-context-protocol/weather/starter-stdio-server) — simplest MCP *server*
-- [ ] [model-context-protocol/weather/starter-webmvc-server](model-context-protocol/weather/starter-webmvc-server)
+- [x] [model-context-protocol/client-starter/starter-default-client](model-context-protocol/client-starter/starter-default-client) — simplest MCP client
+- [x] [model-context-protocol/client-starter/starter-webflux-client](model-context-protocol/client-starter/starter-webflux-client) — same idea, reactive
+- [x] [model-context-protocol/weather/starter-stdio-server](model-context-protocol/weather/starter-stdio-server) — simplest MCP *server*
+- [x] [model-context-protocol/weather/starter-webmvc-server](model-context-protocol/weather/starter-webmvc-server)
 - [ ] [model-context-protocol/weather/starter-webflux-server](model-context-protocol/weather/starter-webflux-server)
 - [ ] [model-context-protocol/weather/manual-webflux-server](model-context-protocol/weather/manual-webflux-server) — manual (non-starter) wiring, more code to understand
 - [ ] [model-context-protocol/filesystem](model-context-protocol/filesystem) — MCP filesystem server example

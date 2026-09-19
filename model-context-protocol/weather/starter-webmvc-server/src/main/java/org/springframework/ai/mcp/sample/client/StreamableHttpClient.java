@@ -30,6 +30,7 @@ public class StreamableHttpClient {
 
 	public static void main(String[] args) {
 
+		// The MCP server should be run manually
 		HttpClientStreamableHttpTransport transport = HttpClientStreamableHttpTransport.builder("http://localhost:8080")
 			.build();
 
@@ -41,22 +42,29 @@ public class StreamableHttpClient {
 
 		// List and demonstrate tools
 		ListToolsResult toolsList = client.listTools();
-		System.out.println("Available Tools = " + toolsList);
+//		System.out.println("Available Tools = " + toolsList);
+		System.out.println("Available Tools = ");
+
+		toolsList.tools().stream().forEach(tool -> {
+			System.out.println("Tool: " + tool.name() + ", description: " + tool.description() + ", schema: "
+					+ tool.inputSchema());
+		});
 
 		CallToolResult toUpperCaseResult = client
 			.callTool(CallToolRequest.builder("toUpperCase").arguments(Map.of("input", "hellow")).build());
-		System.out.println("toUpperCase Result = " + toUpperCaseResult);
+		System.out.println("\n toUpperCase Result = " + toUpperCaseResult);
 
 		CallToolResult weatherForcastResult = client.callTool(CallToolRequest.builder("getWeatherForecastByLocation")
 			.arguments(Map.of("latitude", "47.6062", "longitude", "-122.3321"))
 			.build());
-		System.out.println("Weather Forcast: " + weatherForcastResult);
+		System.out.println("\n Weather Forcast: " + weatherForcastResult);
 
 		CallToolResult alertResult = client
 			.callTool(CallToolRequest.builder("getAlerts").arguments(Map.of("state", "NY")).build());
-		System.out.println("Alert Response = " + alertResult);
+		System.out.println("\n Alert Response = " + alertResult);
 
 		client.closeGracefully();
+
 	}
 
 }

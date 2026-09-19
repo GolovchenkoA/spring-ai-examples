@@ -46,13 +46,14 @@ public class SampleClient {
 		// List and demonstrate tools
 		ListToolsResult toolsList = client.listTools();
 		System.out.println("Available Tools = " + toolsList);
+
 		toolsList.tools().stream().forEach(tool -> {
 			System.out.println("Tool: " + tool.name() + ", description: " + tool.description() + ", schema: "
 					+ tool.inputSchema());
 		});
 
 		CallToolResult weatherForcastResult = client.callTool(CallToolRequest.builder("getWeatherForecastByLocation")
-			.arguments(Map.of("latitude", "47.6062", "longitude", "-122.3321"))
+			.arguments(Map.of("latitude", 47.6062, "longitude", -122.3321))
 			.build());
 		System.out.println("Weather Forcast: " + weatherForcastResult);
 

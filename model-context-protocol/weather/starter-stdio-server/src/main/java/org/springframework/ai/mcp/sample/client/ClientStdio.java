@@ -49,13 +49,15 @@ public class ClientStdio {
 
 		// List and demonstrate tools
 		ListToolsResult toolsList = client.listTools();
-		System.out.println("Available Tools = " + toolsList);
+		System.out.println("Available Tools:");
+		toolsList.tools().forEach(System.out::println);
 
 		CallToolResult weatherForcastResult = client.callTool(CallToolRequest.builder("getWeatherForecastByLocation")
 			.arguments(Map.of("latitude", "47.6062", "longitude", "-122.3321"))
 			.build());
 
-		System.out.println("Weather Forcast: " + weatherForcastResult);
+
+		System.out.println("\nWeather Forcast: " + weatherForcastResult);
 
 		CallToolResult alertResult = client
 			.callTool(CallToolRequest.builder("getAlerts").arguments(Map.of("state", "NY")).build());
