@@ -1,9 +1,12 @@
 package org.springframework.ai.mcp.samples.filesystem;
 
+import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.modelcontextprotocol.client.McpClient;
 import io.modelcontextprotocol.client.McpSyncClient;
@@ -61,6 +64,8 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringBootApplication
 public class Application {
+
+	private static final String FILESYSTEM_SERVER_PACKAGE = "@modelcontextprotocol/server-filesystem";
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -130,13 +135,20 @@ public class Application {
 	 * <p><b>Path Handling:</b> Uses relative path {@code "target"} for cross-platform compatibility.
 	 * The MCP server resolves this relative to the current working directory.
 	 *
+	 * <p><b>Validation:</b> Before starting the client, checks that the
+	 * {@code @modelcontextprotocol/server-filesystem} npm package is installed globally and
+	 * fails with an {@link IllegalStateException} if it is not.
+	 *
 	 * @return configured MCP sync client
+	 * @throws IllegalStateException if the MCP server-filesystem package is not installed
 	 * @see <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem">
 	 *      MCP Filesystem Server Documentation</a>
 	 */
 	@Bean(destroyMethod = "close")
 	@ConditionalOnMissingBean(McpSyncClient.class)
 	public McpSyncClient mcpClient() {
+
+		verifyFilesystemServerInstalled(FILESYSTEM_SERVER_PACKAGE);
 
 		ServerParameters stdioParams;
 
@@ -164,6 +176,50 @@ public class Application {
 		System.out.println("MCP Initialized: " + init);
 
 		return mcpClient;
+	}
+
+	/**
+	 * Verifies that the MCP server-filesystem npm package is installed globally by running
+	 * {@code npm ls -g} for it (via {@code cmd.exe /c} on Windows, where npm is a batch
+	 * file, and directly on Linux/Mac).
+	 *
+	 * @throws IllegalStateException if the package is not installed or npm cannot be run
+	 */
+	private static void verifyFilesystemServerInstalled(String npmPackage) {
+		List<String> command = isWindows()
+				? List.of("cmd.exe", "/c", "npm", "ls", "-g", "--depth=0", npmPackage)
+				: List.of("npm", "ls", "-g", "--depth=0", npmPackage);
+
+		String installHint = "Install it with: npm install -g " + npmPackage;
+
+		try {
+			Process process = new ProcessBuilder(command)
+					.redirectOutput(Redirect.DISCARD)
+					.redirectError(Redirect.DISCARD)
+					.start();
+
+			if (!process.waitFor(30, TimeUnit.SECONDS)) {
+				process.destroyForcibly();
+				throw new IllegalStateException("MCP server-filesystem is not available: checking for '"
+						+ npmPackage + "' timed out. " + installHint);
+			}
+
+			// npm ls exits with a non-zero code when the package is not installed
+			if (process.exitValue() != 0) {
+				throw new IllegalStateException("MCP server-filesystem is not available: the npm package '"
+						+ npmPackage + "' is not installed globally. " + installHint);
+			}
+		}
+		catch (IOException e) {
+			throw new IllegalStateException("MCP server-filesystem is not available: could not run npm to check for '"
+					+ npmPackage + "' (is Node.js/npm installed and on the PATH?). " + installHint, e);
+		}
+		catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			throw new IllegalStateException(
+					"MCP server-filesystem is not available: interrupted while checking for '"
+							+ npmPackage + "'. " + installHint, e);
+		}
 	}
 
 	/**

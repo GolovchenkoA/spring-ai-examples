@@ -25,7 +25,12 @@ The application **automatically detects** your operating system and configures t
 - Java 17 or higher
 - Maven 3.6+
 - Node.js and npx (npm comes with Node.js)
-- OpenAI API key
+- The MCP filesystem server installed globally (the app checks this at startup and fails with
+  "MCP server-filesystem is not available" if it is missing):
+  ```bash
+  npm install -g @modelcontextprotocol/server-filesystem
+  ```
+- Anthropic API key
 
 ### Installing Node.js/npx
 
@@ -57,21 +62,21 @@ npx --version
    cd spring-ai-examples/model-context-protocol/filesystem
    ```
 
-2. **Set your OpenAI API key:**
+2. **Set your Anthropic API key:**
 
    **Linux/macOS:**
    ```bash
-   export OPENAI_API_KEY='your-api-key-here'
+   export ANTHROPIC_API_KEY='your-api-key-here'
    ```
 
    **Windows (Command Prompt):**
    ```cmd
-   set OPENAI_API_KEY=your-api-key-here
+   set ANTHROPIC_API_KEY=your-api-key-here
    ```
 
    **Windows (PowerShell):**
    ```powershell
-   $env:OPENAI_API_KEY="your-api-key-here"
+   $env:ANTHROPIC_API_KEY="your-api-key-here"
    ```
 
 3. **Create a sample test file:**

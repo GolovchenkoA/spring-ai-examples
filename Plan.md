@@ -28,13 +28,13 @@ Tick a box once you've run and tried a module.
 - [x] [model-context-protocol/client-starter/starter-webflux-client](model-context-protocol/client-starter/starter-webflux-client) — same idea, reactive
 - [x] [model-context-protocol/weather/starter-stdio-server](model-context-protocol/weather/starter-stdio-server) — simplest MCP *server*
 - [x] [model-context-protocol/weather/starter-webmvc-server](model-context-protocol/weather/starter-webmvc-server)
-- [ ] [model-context-protocol/weather/starter-webflux-server](model-context-protocol/weather/starter-webflux-server)
-- [ ] [model-context-protocol/weather/manual-webflux-server](model-context-protocol/weather/manual-webflux-server) — manual (non-starter) wiring, more code to understand
-- [ ] [model-context-protocol/filesystem](model-context-protocol/filesystem) — MCP filesystem server example
+- [x] [model-context-protocol/weather/starter-webflux-server](model-context-protocol/weather/starter-webflux-server)
+- [x] [model-context-protocol/weather/manual-webflux-server](model-context-protocol/weather/manual-webflux-server) — manual (non-starter) wiring, more code to understand
+- [???] [model-context-protocol/filesystem](model-context-protocol/filesystem) — MCP filesystem server example
 
 ## Tier 3 — MCP with real external APIs + memory
-- [ ] [model-context-protocol/web-search/brave-starter](model-context-protocol/web-search/brave-starter) — one-shot Brave Search, needs `BRAVE_API_KEY` + npx
-- [ ] [model-context-protocol/web-search/brave-chatbot](model-context-protocol/web-search/brave-chatbot) — same but interactive + conversation memory
+- [x] [model-context-protocol/web-search/brave-starter](model-context-protocol/web-search/brave-starter) — one-shot Brave Search, needs `BRAVE_API_KEY` + npx
+- [x] [model-context-protocol/web-search/brave-chatbot](model-context-protocol/web-search/brave-chatbot) — same but interactive + conversation memory
 - [ ] [misc/claude-skills-demo](misc/claude-skills-demo)
 
 ## Tier 4 — Agentic workflow patterns (multi-step LLM orchestration, single process)
