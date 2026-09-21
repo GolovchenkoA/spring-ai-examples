@@ -68,3 +68,8 @@ integration-testing/supporting-repos/
 test.db
 
 .version-backups/
+
+# node
+**/node_modules/**
+**/package.json
+**/package-lock.json

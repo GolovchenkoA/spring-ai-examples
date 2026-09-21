@@ -35,7 +35,7 @@ Tick a box once you've run and tried a module.
 ## Tier 3 — MCP with real external APIs + memory
 - [x] [model-context-protocol/web-search/brave-starter](model-context-protocol/web-search/brave-starter) — one-shot Brave Search, needs `BRAVE_API_KEY` + npx
 - [x] [model-context-protocol/web-search/brave-chatbot](model-context-protocol/web-search/brave-chatbot) — same but interactive + conversation memory
-- [ ] [misc/claude-skills-demo](misc/claude-skills-demo)
+- [x] [misc/claude-skills-demo](misc/claude-skills-demo)
 
 ## Tier 4 — Agentic workflow patterns (multi-step LLM orchestration, single process)
 - [ ] [agentic-patterns/chain-workflow](agentic-patterns/chain-workflow) — sequential pipeline
