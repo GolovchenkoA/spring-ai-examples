@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="list">
+    <div th:if="${suggestions != null and !suggestions.isEmpty()}"
+         class="border border-indigo-100 bg-indigo-50/60 rounded-lg p-3 space-y-2 animate-fade-in">
+        <p class="text-xs font-medium text-indigo-700 uppercase tracking-wide">Similar questions asked before</p>
+        <div th:each="s : ${suggestions}"
+             class="suggestion-item bg-white border border-gray-200 rounded-lg px-3 py-2 cursor-pointer flex items-center justify-between"
+             th:onclick="'loadQaItem(\'' + ${s.id()} + '\')'">
+            <span class="text-sm text-gray-800 truncate mr-3" th:text="${s.title()}">Past question...</span>
+            <span class="text-xs font-medium text-indigo-600 flex-shrink-0"
+                  th:text="${#numbers.formatDecimal(s.score() * 100, 0, 0)} + '%'">82%</span>
+        </div>
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="list">
+    <div th:if="${history == null or history.isEmpty()}" class="text-center py-8 text-gray-400">
+        <svg class="w-12 h-12 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+        </svg>
+        <p class="text-sm">No questions asked yet</p>
+    </div>
+
+    <div th:unless="${history == null or history.isEmpty()}" class="space-y-2">
+        <th:block th:each="item : ${history}">
+            <div class="history-item p-3 rounded-lg border border-gray-100 cursor-pointer"
+                 th:data-id="${item.id()}"
+                 th:onclick="'loadQaItem(\'' + ${item.id()} + '\')'">
+                <p class="text-sm text-gray-800 truncate" th:text="${item.title()}">Question title...</p>
+                <span class="text-xs text-gray-400" th:text="${#temporals.format(item.createdAt(), 'MMM d, HH:mm')}">
+                    Nov 27, 14:30
+                </span>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: rag-embeddings
+  thymeleaf:
+    cache: false
+  ai:
+    model:
+      chat: anthropic
+      embedding: openai
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY}
+      chat:
+        options:
+          model: claude-sonnet-4-5
+          max-tokens: 4096
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      embedding:
+        options:
+          model: text-embedding-3-small
+
+rag:
+  title-length: 100
+  similarity-threshold: 0.78
+  suggestion-top-k: 5
+  min-suggestion-length: 10
+  store-path: ./data/vector-store.json
+
+server:
+  port: 8081
+
+logging:
+  level:
+    com.example.ragembeddings: DEBUG
+    org.springframework.ai: INFO

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG + Vector Store Playground</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366F1',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- HTMX -->
+    <script src="/webjars/htmx.org/2.0.4/dist/htmx.min.js"></script>
+
+    <style>
+        .htmx-request .loading-indicator { display: flex; }
+        .htmx-request .submit-text { display: none; }
+        .loading-indicator { display: none; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin { animation: spin 1s linear infinite; }
+
+        .history-item { transition: all 0.2s ease; }
+        .history-item:hover { background-color: #F3F4F6; }
+        .history-item.selected { background-color: #EEF2FF; border-color: #6366F1; }
+
+        .suggestion-item { transition: all 0.15s ease; }
+        .suggestion-item:hover { background-color: #EEF2FF; border-color: #6366F1; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">RAG + Vector Store Playground</h1>
+                        <p class="text-sm text-gray-500">Ask, embed, and re-discover past answers by similarity</p>
+                    </div>
+                </div>
+                <button onclick="toggleSidebar()" class="lg:hidden p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex gap-6">
+
+            <!-- History Sidebar (left) -->
+            <aside id="history-sidebar" class="hidden lg:block w-72 flex-shrink-0">
+                <div class="bg-white rounded-xl shadow-lg p-4 sticky top-24">
+                    <h3 class="font-semibold text-gray-900 flex items-center space-x-2 mb-4">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>History</span>
+                    </h3>
+
+                    <div id="history-list"
+                         hx-get="/history"
+                         hx-trigger="load, historyUpdated from:body"
+                         hx-swap="innerHTML"
+                         class="space-y-2 max-h-[70vh] overflow-y-auto">
+                        <div th:replace="~{fragments/history :: list}"></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content (right, larger) -->
+            <main class="flex-1 min-w-0">
+
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-1">Ask a question</h2>
+                    <p class="text-gray-600 text-sm">Start typing - if a similar question was asked before, you'll see it below before you submit.</p>
+                </div>
+
+                <!-- Question Form -->
+                <form id="question-form"
+                      hx-post="/api/questions"
+                      hx-target="#answer-area"
+                      hx-swap="innerHTML"
+                      hx-on::before-request="showThinking()"
+                      hx-on::after-request="afterAsk()"
+                      class="bg-white rounded-xl shadow-lg p-6 mb-4">
+
+                    <label for="question" class="block text-sm font-medium text-gray-700 mb-2">
+                        Your question
+                    </label>
+                    <textarea id="question"
+                              name="question"
+                              rows="4"
+                              required
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none transition-shadow"
+                              placeholder="Ask anything... type at least a short sentence to see similar past questions"
+                              hx-post="/api/suggestions"
+                              hx-trigger="keyup changed delay:400ms"
+                              hx-target="#suggestions-area"
+                              hx-swap="innerHTML"
+                              hx-include="this"></textarea>
+
+                    <!-- Live Suggestions -->
+                    <div id="suggestions-area" class="mt-3"></div>
+
+                    <div class="mt-4 flex items-center justify-between">
+                        <p class="text-xs text-gray-500">Tip: click a suggestion below to reuse its stored answer instead of asking again.</p>
+                        <button type="submit"
+                                class="bg-primary hover:bg-primary/90 text-white font-medium py-2.5 px-6 rounded-lg transition-colors flex items-center space-x-2">
+                            <span class="submit-text flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                <span>Ask</span>
+                            </span>
+                            <span class="loading-indicator items-center space-x-2">
+                                <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                <span>Thinking...</span>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Answer Area -->
+                <div id="answer-area">
+                    <div id="empty-state" class="text-center py-12 text-gray-500">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        </svg>
+                        <p>Your question and its answer will appear here</p>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+
+    <script>
+        function showThinking() {
+            const emptyState = document.getElementById('empty-state');
+            if (emptyState) emptyState.classList.add('hidden');
+        }
+
+        function afterAsk() {
+            htmx.trigger(document.body, 'historyUpdated');
+            document.getElementById('suggestions-area').innerHTML = '';
+        }
+
+        // Clicking a history item or a suggestion loads it (no LLM call) and highlights it.
+        function loadQaItem(id) {
+            htmx.ajax('GET', '/api/questions/' + encodeURIComponent(id), '#answer-area').then(() => {
+                document.querySelectorAll('.history-item').forEach(el => {
+                    el.classList.toggle('selected', el.dataset.id === id);
+                });
+            });
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('history-sidebar');
+            sidebar.classList.toggle('hidden');
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('inset-0');
+            sidebar.classList.toggle('z-40');
+            sidebar.classList.toggle('bg-gray-900/50');
+            sidebar.classList.toggle('p-4');
+        }
+
+        function showToast(message, type) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgColor = { success: 'bg-green-500', error: 'bg-red-500' }[type] || 'bg-gray-700';
+            toast.className = bgColor + ' text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in';
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        document.body.addEventListener('htmx:responseError', function () {
+            showToast('Something went wrong. Please try again.', 'error');
+        });
+    </script>
+
+</body>
+</html>

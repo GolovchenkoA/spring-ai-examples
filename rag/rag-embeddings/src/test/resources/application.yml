@@ -1,0 +1,12 @@
+spring:
+  ai:
+    model:
+      chat: anthropic
+      embedding: openai
+    anthropic:
+      api-key: test-key
+    openai:
+      api-key: test-key
+
+rag:
+  store-path: ./build/test-data/vector-store.json
