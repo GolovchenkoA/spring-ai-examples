@@ -15,8 +15,11 @@
  */
 package org.springframework.ai.openai.samples.helloworld;
 
+import java.util.UUID;
+
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.stereotype.Component;
@@ -51,19 +54,27 @@ public class ReflectionAgent {
 
     public String run(String userQuestion, int maxIterations) {
 
-        String generation = generateChatClient.prompt(userQuestion).call().content();
+        String conversationId = UUID.randomUUID().toString();
+
+        String generation = generateChatClient.prompt(userQuestion)
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, conversationId))
+                .call().content();
         System.out.println("##generation\n\n" + generation);
         String critique;
         for (int i = 0; i < maxIterations; i++) {
 
-            critique = critiqueChatClient.prompt(generation).call().content();
+            critique = critiqueChatClient.prompt(generation)
+                    .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, conversationId))
+                    .call().content();
 
             System.out.println("##Critique\n\n" + critique);
             if (critique.contains("<OK>")) {
                 System.out.println("\n\nStop sequence found\n\n");
                 break;
             }
-            generation = generateChatClient.prompt(critique).call().content();
+            generation = generateChatClient.prompt(critique)
+                    .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, conversationId))
+                    .call().content();
         }
         return generation;
 

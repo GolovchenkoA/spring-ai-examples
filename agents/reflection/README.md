@@ -16,18 +16,18 @@ The application implements a reflection-based system where the **Reflection Agen
 - Java 17 or higher
 - Maven
 
-This examples uses OpenAI as the model provider.
+This example uses Anthropic (Claude) as the model provider.
 
-Before using the AI commands, make sure you have a developer token from OpenAI.
+Before using the AI commands, make sure you have an API key from Anthropic.
 
-Create an account at [OpenAI Signup](https://platform.openai.com/signup) and generate the token at [API Keys](https://platform.openai.com/account/api-keys).
+Create an account at [Anthropic Console](https://console.anthropic.com/) and generate the key at [API Keys](https://console.anthropic.com/settings/keys).
 
-The Spring AI project defines a configuration property named `spring.ai.openai.api-key` that you should set to the value of the API key obtained from OpenAI.
+The Spring AI project defines a configuration property named `spring.ai.anthropic.api-key` that you should set to the value of the API key obtained from Anthropic. It lives in `application-claude.yaml`, a Spring profile-specific file, so the `claude` profile must be active for it to load.
 
 Exporting an environment variable is one way to set that configuration property:
 
 ```shell
-export SPRING_AI_OPENAI_API_KEY=<INSERT KEY HERE>
+export ANTHROPIC_API_KEY=<INSERT KEY HERE>
 ```
 
 
@@ -35,8 +35,8 @@ export SPRING_AI_OPENAI_API_KEY=<INSERT KEY HERE>
 ## Running the Application
 1. Clone the repository
 2. Navigate to the project directory
-3. Run the application using Maven wrapper:
-   `./mvnw spring-boot:run`
+3. Run the application with the `claude` profile active:
+   `./mvnw spring-boot:run -Dspring-boot.run.profiles=claude`
 
 ## Project Structure
 ### Main Components
