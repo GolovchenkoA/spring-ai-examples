@@ -38,15 +38,16 @@ Tick a box once you've run and tried a module.
 - [x] [misc/claude-skills-demo](misc/claude-skills-demo)
 
 ## Tier 4 — Agentic workflow patterns (multi-step LLM orchestration, single process)
-- [ ] [agentic-patterns/chain-workflow](agentic-patterns/chain-workflow) — sequential pipeline
-- [ ] [agentic-patterns/routing-workflow](agentic-patterns/routing-workflow) — classify-then-dispatch
-- [ ] [agentic-patterns/parallelization-workflow](agentic-patterns/parallelization-workflow) — fan-out/fan-in
-- [ ] [agents/reflection](agents/reflection) — self-critique loop
+- [x] [agentic-patterns/chain-workflow](agentic-patterns/chain-workflow) — sequential pipeline
+- [x] [agentic-patterns/routing-workflow](agentic-patterns/routing-workflow) — classify-then-dispatch
+- [x] [agentic-patterns/routing-workflow-llama](agentic-patterns/routing-workflow-llama) — same pattern, offline via local Ollama, different model per route
+- [x] [agentic-patterns/parallelization-workflow](agentic-patterns/parallelization-workflow) — fan-out/fan-in
+- [x] [agents/reflection](agents/reflection) — self-critique loop
 - [ ] [agentic-patterns/evaluator-optimizer](agentic-patterns/evaluator-optimizer) — generator+critic loop
 - [ ] [agentic-patterns/orchestrator-workers](agentic-patterns/orchestrator-workers) — dynamic task decomposition, closest to a true agent swarm
 
 ## Tier 5 — Advanced MCP protocol features (multi-module, more moving parts)
-- [ ] [model-context-protocol/mcp-annotations/mcp-annotations-server](model-context-protocol/mcp-annotations/mcp-annotations-server) + [mcp-annotations-client](model-context-protocol/mcp-annotations/mcp-annotations-client) — annotation-driven MCP
+- [x] [model-context-protocol/mcp-annotations/mcp-annotations-server](model-context-protocol/mcp-annotations/mcp-annotations-server) + [mcp-annotations-client](model-context-protocol/mcp-annotations/mcp-annotations-client) — annotation-driven MCP . Includes server logging (see logging.file.name)
 - [ ] [model-context-protocol/sampling/mcp-sampling-server](model-context-protocol/sampling/mcp-sampling-server) + [mcp-sampling-client](model-context-protocol/sampling/mcp-sampling-client) — server-initiated LLM sampling (harder MCP concept)
 - [ ] [model-context-protocol/sampling-annotations/mcp-sampling-server-annotations](model-context-protocol/sampling-annotations/mcp-sampling-server-annotations) + [client](model-context-protocol/sampling-annotations/mcp-sampling-client-annotations)
 - [ ] [model-context-protocol/dynamic-tool-update/server](model-context-protocol/dynamic-tool-update/server) + [client](model-context-protocol/dynamic-tool-update/client) — tools that change at runtime

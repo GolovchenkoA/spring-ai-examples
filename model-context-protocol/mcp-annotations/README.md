@@ -6,6 +6,7 @@ Demonstrates annotation-driven MCP development with Spring AI. Covers server-sid
 
 ## Modules
 
+
 ### [mcp-annotations-server](mcp-annotations-server/)
 
 MCP server with four provider beans:
