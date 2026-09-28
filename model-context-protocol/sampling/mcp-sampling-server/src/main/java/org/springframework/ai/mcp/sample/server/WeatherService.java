@@ -90,7 +90,6 @@ public class WeatherService {
 										.writeValueAsString(weatherResponse))
 						.build())), 2000)
 					.systemPrompt("You are a poet!");
-				;
 
 				var opeAiLlmMessageRequest = messageRequestBuilder
 					.modelPreferences(ModelPreferences.builder().addHint("openai").build())
@@ -108,8 +107,7 @@ public class WeatherService {
 
 			}
 
-			exchange
-				.loggingNotification(LoggingMessageNotification.builder(LoggingLevel.INFO, "Finish Sampling").build());
+			exchange.loggingNotification(LoggingMessageNotification.builder(LoggingLevel.INFO, "Finish Sampling").build());
 
 		});
 

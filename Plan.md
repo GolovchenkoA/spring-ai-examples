@@ -48,10 +48,10 @@ Tick a box once you've run and tried a module.
 
 ## Tier 5 — Advanced MCP protocol features (multi-module, more moving parts)
 - [x] [model-context-protocol/mcp-annotations/mcp-annotations-server](model-context-protocol/mcp-annotations/mcp-annotations-server) + [mcp-annotations-client](model-context-protocol/mcp-annotations/mcp-annotations-client) — annotation-driven MCP . Includes server logging (see logging.file.name)
-- [ ] [model-context-protocol/sampling/mcp-sampling-server](model-context-protocol/sampling/mcp-sampling-server) + [mcp-sampling-client](model-context-protocol/sampling/mcp-sampling-client) — server-initiated LLM sampling (harder MCP concept)
-- [ ] [model-context-protocol/sampling-annotations/mcp-sampling-server-annotations](model-context-protocol/sampling-annotations/mcp-sampling-server-annotations) + [client](model-context-protocol/sampling-annotations/mcp-sampling-client-annotations)
-- [ ] [model-context-protocol/dynamic-tool-update/server](model-context-protocol/dynamic-tool-update/server) + [client](model-context-protocol/dynamic-tool-update/client) — tools that change at runtime
-- [ ] [model-context-protocol/mcp-apps-server](model-context-protocol/mcp-apps-server) — note: Gradle-based, not Maven, so build tooling differs from the rest
+- [x] [model-context-protocol/sampling/mcp-sampling-server](model-context-protocol/sampling/mcp-sampling-server) + [mcp-sampling-client](model-context-protocol/sampling/mcp-sampling-client) — server-initiated LLM sampling (harder MCP concept)
+- [x] (partially) [model-context-protocol/sampling-annotations/mcp-sampling-server-annotations](model-context-protocol/sampling-annotations/mcp-sampling-server-annotations) + [client](model-context-protocol/sampling-annotations/mcp-sampling-client-annotations)
+- [x] [model-context-protocol/dynamic-tool-update/server](model-context-protocol/dynamic-tool-update/server) + [client](model-context-protocol/dynamic-tool-update/client) — tools that change at runtime
+- [x] [model-context-protocol/mcp-apps-server](model-context-protocol/mcp-apps-server) — The App has UI. note: Gradle-based, not Maven, so build tooling differs from the rest
 
 ## Tier 6 — Infra-heavy / most complex
 - [ ] [model-context-protocol/brave-docker-agents-gateway](model-context-protocol/brave-docker-agents-gateway) — Docker-based agents gateway, extra infra dependency
