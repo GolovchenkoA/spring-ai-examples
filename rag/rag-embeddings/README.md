@@ -1,3 +1,4 @@
+
 # RAG + Vector Store Playground
 
 A small standalone web app for experimenting with RAG and vector similarity search.

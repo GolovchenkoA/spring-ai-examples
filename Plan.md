@@ -54,7 +54,7 @@ Tick a box once you've run and tried a module.
 - [x] [model-context-protocol/mcp-apps-server](model-context-protocol/mcp-apps-server) — The App has UI. note: Gradle-based, not Maven, so build tooling differs from the rest
 
 ## Tier 6 — Infra-heavy / most complex
-- [ ] [model-context-protocol/brave-docker-agents-gateway](model-context-protocol/brave-docker-agents-gateway) — Docker-based agents gateway, extra infra dependency
+- [x] [model-context-protocol/brave-docker-agents-gateway](model-context-protocol/brave-docker-agents-gateway) — Docker-based agents gateway, extra infra dependency
 - [ ] [kotlin/rag-with-kotlin](kotlin/rag-with-kotlin) — RAG: embeddings + vector store setup, most moving parts of any module here
 
 ---
